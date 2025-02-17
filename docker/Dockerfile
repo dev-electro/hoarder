@@ -114,7 +114,9 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 CMD wget 
 ################# The web container ##############
 
 FROM aio_builder AS web
-
+# Remove the global ENTRYPOINT to prevent CLI conflict
+ENTRYPOINT []  # <--- Add this line to clear the previous entrypoint
+# Start the Next.js server directly
 # FROM ... AS web
 CMD ["node", "apps/web/server.js"]  # <-- Make sure this is present
 RUN touch /etc/s6-overlay/s6-rc.d/user/contents.d/init-db-migration \
