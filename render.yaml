@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: hoarder
+    env: docker
+    dockerfilePath: ./docker/Dockerfile
+    dockerContext: .
+    targetImage: aio
+    healthCheckPath: /api/health
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+      - key: NEXTAUTH_URL_INTERNAL
+        value: http://localhost:3000
