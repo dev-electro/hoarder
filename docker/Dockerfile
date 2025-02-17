@@ -115,6 +115,8 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 CMD wget 
 
 FROM aio_builder AS web
 
+# FROM ... AS web
+CMD ["node", "apps/web/server.js"]  # <-- Make sure this is present
 RUN touch /etc/s6-overlay/s6-rc.d/user/contents.d/init-db-migration \
     /etc/s6-overlay/s6-rc.d/user/contents.d/svc-web
 ENV USING_LEGACY_SEPARATE_CONTAINERS=true
